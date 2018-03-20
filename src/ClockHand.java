@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class ClockHand implements MoveableShape {
+public class ClockHand implements MoveableShape, Stroke {
     @Override
     public void draw(Graphics2D g2) {
 
@@ -9,5 +9,10 @@ public class ClockHand implements MoveableShape {
     @Override
     public void translate(int dx, int dy) {
 
+    }
+
+    @Override
+    public Shape createStrokedShape(Shape p) {
+        return null;
     }
 }
