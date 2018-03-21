@@ -13,7 +13,7 @@ public class ClockTester
       JFrame frame = new JFrame();
 
       
-      ClockFace clockIcon = new ClockFace(0, 0, CLOCK_RADIUS);
+      ClockFace clockIcon = new ClockFace(0, 0, CLOCK_RADIUS, Type.CLOCK);
       StopWatchDial stopwatchIcon = new StopWatchDial(0,0,CLOCK_RADIUS);
       BorderLayout layout = new BorderLayout();
       frame.setLayout(layout);
