@@ -24,15 +24,18 @@ public class StopWatchDial extends JPanel{
 		this.width = width;
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(width, width));
+		
+		ClockFace outer = new ClockFace(0,0,width);
+		ClockFace inner = new ClockFace(width/4,width/8,width/2);
+		inner.setPreferredSize(new Dimension(width, width));
+		
+		this.add(outer);
+		outer.add(inner);
 	}
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		super.paintComponent(g2);
-		
-		ClockFace outer = new ClockFace(0,0,width);
-		ClockFace inner = new ClockFace(0,width/8,width/2);
-		this.add(outer);
-		outer.add(inner);
+			
 	}
 }
