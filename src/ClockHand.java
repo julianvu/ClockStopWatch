@@ -5,6 +5,7 @@ public class ClockHand implements MoveableShape, Stroke {
     // instance variables
     private double x1, x2, y1, y2, length;
     private int tick;
+    private int minuteCount;
     private int hourTick;
 
 
@@ -24,10 +25,20 @@ public class ClockHand implements MoveableShape, Stroke {
         return this.length;
     }
 
+    public int getMinuteCount() {
+        return minuteCount;
+    }
+
+    public int getTick() {
+        return tick;
+    }
+
     public void tick() {
         if (tick == 60) {
             tick = 0;
+            minuteCount++;
         }
+
         // Calculate angle of rotation - pi/2 since angle is from 0 on unit circle.
         // Subtracting pi/2 from angle of rotation will essentially rotate the clock
         // counter-clockwise by a quarter radian (which is what we want)
@@ -37,6 +48,13 @@ public class ClockHand implements MoveableShape, Stroke {
         // x = rcos(theta), y = rsin(theta)
         setEndPoint(x1 + length * Math.cos(theta), y1 + length * Math.sin(theta));
         tick++;
+    }
+
+    public void tickTo(int destination) {
+        double theta = destination/60.0 * 2.0 * Math.PI - Math.PI/2;
+
+        // x = rcos(theta), y = rsin(theta)
+        setEndPoint(x1 + length * Math.cos(theta), y1 + length * Math.sin(theta));
     }
 
     public void hourTick() {

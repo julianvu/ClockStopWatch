@@ -33,12 +33,15 @@ public class ClockTester
 		
 		Timer t = new Timer(SEC_DELAY, event -> {
             stopwatch.secTick();
+            if (stopwatch.getOuter().getHand().getMinuteCount() > 0) {
+                stopwatch.getInner().getHand().tickTo(stopwatch.getOuter().getHand().getMinuteCount());
+            }
             frame.repaint();
         });
-		Timer t2 = new Timer(MIN_DELAY, event -> {
-            stopwatch.minTick();
-            frame.repaint();
-        });
+//		Timer t2 = new Timer(MIN_DELAY, event -> {
+//            stopwatch.minTick();
+//            frame.repaint();
+//        });
 		
 		JButton stopwatchButton = new JButton("stopwatch");
 		topNav.add(stopwatchButton);
@@ -50,7 +53,7 @@ public class ClockTester
             frame.repaint();
 
             t.restart();
-            t2.restart();
+            //t2.restart();
             });
 		
 		frame.add(topNav, BorderLayout.NORTH);
