@@ -1,6 +1,5 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
    This program implements an animation that moves
@@ -22,48 +21,36 @@ public class ClockTester
 		frame.setLayout(layout);
 		frame.add(clockIcon, BorderLayout.CENTER);
 		JPanel topNav = new JPanel(new FlowLayout());
-
-		
 		
 		JButton clockButton = new JButton("clock");
 		topNav.add(clockButton);
-		clockButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-				frame.add(clockIcon, BorderLayout.CENTER);
-				frame.revalidate();
-				frame.repaint();
-			}
-		});
-
+		clockButton.addActionListener(e -> {
+            frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+            frame.add(clockIcon, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+        });
 		
-		
-		Timer t = new Timer(SEC_DELAY, new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				stopwatch.secTick();
-				frame.repaint();
-			}
-		});
-		Timer t2 = new Timer(MIN_DELAY, new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				stopwatch.minTick();
-				frame.repaint();
-			}
-		});
+		Timer t = new Timer(SEC_DELAY, event -> {
+            stopwatch.secTick();
+            frame.repaint();
+        });
+		Timer t2 = new Timer(MIN_DELAY, event -> {
+            stopwatch.minTick();
+            frame.repaint();
+        });
 		
 		JButton stopwatchButton = new JButton("stopwatch");
 		topNav.add(stopwatchButton);
-		stopwatchButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-				frame.add(stopwatch, BorderLayout.CENTER);
-				frame.revalidate();
-				frame.repaint();
-			
-				t.restart();
-				t2.restart();
-				}
-		});
+		stopwatchButton.addActionListener(e -> {
+            frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
+            frame.add(stopwatch, BorderLayout.CENTER);
+            frame.revalidate();
+            frame.repaint();
+
+            t.restart();
+            t2.restart();
+            });
 		
 		frame.add(topNav, BorderLayout.NORTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
