@@ -3,7 +3,7 @@ import java.awt.geom.Line2D;
 
 public class ClockHand implements MoveableShape, Stroke {
     // instance variables
-    private int x1, x2, y1, y2, length;
+    private double x1, x2, y1, y2, length;
 
 
     public ClockHand(int x1, int y1, int x2, int y2) {
@@ -11,6 +11,12 @@ public class ClockHand implements MoveableShape, Stroke {
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+
+        this.length = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+    }
+
+    public double getLength() {
+        return this.length;
     }
 
     @Override
@@ -21,8 +27,13 @@ public class ClockHand implements MoveableShape, Stroke {
 
     @Override
     public void translate(int dx, int dy) {
-        x2 += dx;
-        y2 += dy;
+        x2 = dx;
+        y2 = dy;
+    }
+
+    public void setEndPoint(double x, double y) {
+        x2 = x;
+        y2 = y;
     }
 
     @Override
