@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 
@@ -26,12 +27,6 @@ public class ClockFace extends JPanel
 		this.setPreferredSize(new Dimension(width, width));
 	}
 
-	public void translate(int dx, int dy)
-	{
-		x += dx;
-		y += dy;
-	}
-
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D) g;
@@ -51,30 +46,6 @@ public class ClockFace extends JPanel
 		= new Ellipse2D.Double(this.x,this.y,width, width);
 		g2.setColor(Color.WHITE);
 		g2.fill(clockFace);
-
-        ClockHand secondsHand = new ClockHand(cX, cY, cX, cY - width/2 + 30);
-        ClockHand minutesHand = new ClockHand(cX, cY, cX, cY - width/3);
-        ClockHand hoursHand = new ClockHand(cX, cY, cX, cY - width/5);
-
-        // Proof of concept for being able to move the hands
-
-        // Calculate angle of rotation - pi/2 since angle is from 0 on unit circle.
-        // Subtracting pi/2 from angle of rotation will essentially rotate the clock counter-clockwise by a quarter radian (which is what we want)
-        double theta = 2/60.0 * 2.0 * Math.PI - Math.PI/2;
-
-        // Set end point to Cartesian coordinate conversions
-        // x = Length * cos(theta)
-        // y = Length * sin(theta)
-        secondsHand.setEndPoint(cX + secondsHand.getLength() * Math.cos(theta), cY + secondsHand.getLength() * Math.sin(theta));
-
-        theta = 5/60.0 * 2.0 * Math.PI - Math.PI/2;
-        minutesHand.setEndPoint(cX + minutesHand.getLength() * Math.cos(theta), cY + minutesHand.getLength() * Math.sin(theta));
-
-        g2.setColor(Color.BLACK);
-        secondsHand.draw(g2);
-        minutesHand.draw(g2);
-        hoursHand.draw(g2);
-
 
 		for ( int i=1; i<= 60; i++){
 			// default tick length is short
@@ -117,9 +88,6 @@ public class ClockFace extends JPanel
 		g2.draw(ticksPath);
 		g2.setColor(Color.RED);
 
-		
-		
-		
 		for ( int i=1; i<=12; i++){
 			String numStr = new String();
 			switch(type) {
@@ -144,6 +112,25 @@ public class ClockFace extends JPanel
 			g2.drawString(numStr, (int)cX+tx, (int)cY+ty);
 
 		}
+
+        ClockHand secondsHand = new ClockHand(cX, cY, cX, cY - width/2 + 30);
+        ClockHand minutesHand = new ClockHand(cX, cY, cX, cY - width/3);
+        ClockHand hoursHand = new ClockHand(cX, cY, cX, cY - width/5);
+
+        g2.setColor(Color.BLACK);
+
+        final int DELAY = 1000;
+
+        secondsHand.draw(g2);
+        minutesHand.draw(g2);
+        hoursHand.draw(g2);
+
+        // Not working...
+        ActionListener listener = e -> {
+            secondsHand.tick();
+            secondsHand.draw();
+        };
+        Timer t = new Timer(DELAY, listener);
 	}
 
 	private int x;
