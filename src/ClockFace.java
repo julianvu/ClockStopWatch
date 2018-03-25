@@ -112,25 +112,6 @@ public class ClockFace extends JPanel
 			g2.drawString(numStr, (int)cX+tx, (int)cY+ty);
 
 		}
-
-        ClockHand secondsHand = new ClockHand(cX, cY, cX, cY - width/2 + 30);
-        ClockHand minutesHand = new ClockHand(cX, cY, cX, cY - width/3);
-        ClockHand hoursHand = new ClockHand(cX, cY, cX, cY - width/5);
-
-        g2.setColor(Color.BLACK);
-
-        final int DELAY = 1000;
-
-        secondsHand.draw(g2);
-        minutesHand.draw(g2);
-        hoursHand.draw(g2);
-
-        // Not working...
-        ActionListener listener = e -> {
-            secondsHand.tick();
-            secondsHand.draw();
-        };
-        Timer t = new Timer(DELAY, listener);
 	}
 
 	private int x;
