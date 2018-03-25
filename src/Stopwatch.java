@@ -2,58 +2,40 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Stopwatch extends JLayeredPane{
+public class Stopwatch extends JPanel{
 	int x;
 	int y;
 	int diam;
-	ClockHand secondHand;
-	ClockHand minuteHand;
+	StopWatchDial outer;
+	StopWatchDial inner;
 	
 	public Stopwatch(int x, int y, int diam) {
 		this.x = x;
 		this.y = y;
 		this.diam = diam;
-		StopWatchDial dial = new StopWatchDial(0,0,diam);
-		this.add(dial);
-
-		secondHand = new ClockHand(diam/2, diam/2, diam/2, 0);
-		minuteHand = new ClockHand(diam/2, diam*3/8, diam/2, diam/8);
-	}
-	
-	class HandPanel extends JLayeredPane{
-		@Override
-		public void paintComponent(Graphics g) {
-			Graphics2D g2 = (Graphics2D) g;
-			secondHand.draw(g2);
-			minuteHand.draw(g2);
-		}
+		
+		outer = new StopWatchDial(0,0,diam);
+		inner = new StopWatchDial(0,diam/2,diam/2);
+		//inner.setPreferredSize(new Dimension(diam, diam));
+		outer.add(inner);
+		this.add(outer);
 	}
 	
 	public void secTick() {
-		secondHand.tick();
-		this.repaint();
+		outer.dialTick();
 	}
 	
 	public void minTick() {
-		minuteHand.tick();
-		this.repaint();
+		inner.dialTick();
+	}
+	
+	public void reset() {
+		outer.dialReset();
+		inner.dialReset();
 	}
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		HandPanel panel = new HandPanel();
-		
 		super.paintComponent(g2);
-		panel.paintComponent(g2);
 	}
 }
-
-
-
-
-
-
-
-
-
-

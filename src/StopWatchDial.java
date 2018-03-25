@@ -8,6 +8,8 @@ public class StopWatchDial extends JPanel{
 	private int x;
 	private int y;
 	private int width;
+	ClockFace dial;
+	ClockHand hand;
 			
 	/**
     Constructs a StopWatchDial using 2 ClockFaces <br>
@@ -24,17 +26,22 @@ public class StopWatchDial extends JPanel{
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(width, width));
 		
-		ClockFace outer = new ClockFace(0,0,width, Type.STOPWATCH);
-		ClockFace inner = new ClockFace(width/4, width/8, width/2, Type.STOPWATCH);
-		inner.setPreferredSize(new Dimension(width, width));
-		
-		this.add(outer);
-		outer.add(inner);
+		dial = new ClockFace(0,0,width, Type.STOPWATCH);
+		hand = new ClockHand(width/2, width/2, width/2, 0);
+	}
+	
+	public void dialTick() {
+		hand.tick();
+		this.repaint();
+	}
+	
+	public void dialReset() {
+		hand = new ClockHand(width/2, width/2, width/2, 0);
 	}
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		super.paintComponent(g2);
-			
+		dial.paintComponent(g2);
+		hand.draw(g2);	
 	}
 }

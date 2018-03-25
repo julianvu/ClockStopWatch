@@ -45,6 +45,7 @@ public class ClockTester
 		stopwatchButton.addActionListener(e -> {
             frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
             frame.add(stopwatch, BorderLayout.CENTER);
+            stopwatch.reset();
             frame.revalidate();
             frame.repaint();
 
