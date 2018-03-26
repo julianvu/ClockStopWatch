@@ -15,20 +15,26 @@ public class ClockTester
 	{
 		JFrame frame = new JFrame();
 
-		ClockFace clockIcon = new ClockFace(0, 0, CLOCK_RADIUS, Type.CLOCK);
+		MyClock myClock = new MyClock(0, 0, CLOCK_RADIUS);
 		Stopwatch stopwatch = new Stopwatch(0,0,CLOCK_RADIUS);
 		BorderLayout layout = new BorderLayout();
 		frame.setLayout(layout);
-		frame.add(clockIcon, BorderLayout.CENTER);
+		frame.add(myClock, BorderLayout.CENTER);
 		JPanel topNav = new JPanel(new FlowLayout());
-		
+
+        Timer t2 = new Timer(SEC_DELAY, event -> {
+            myClock.tick();
+            frame.repaint();
+        });
+
 		JButton clockButton = new JButton("clock");
 		topNav.add(clockButton);
 		clockButton.addActionListener(e -> {
             frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-            frame.add(clockIcon, BorderLayout.CENTER);
+            frame.add(myClock, BorderLayout.CENTER);
             frame.revalidate();
             frame.repaint();
+            t2.restart();
         });
 		
 		Timer t = new Timer(SEC_DELAY, event -> {
@@ -38,10 +44,8 @@ public class ClockTester
             }
             frame.repaint();
         });
-//		Timer t2 = new Timer(MIN_DELAY, event -> {
-//            stopwatch.minTick();
-//            frame.repaint();
-//        });
+
+
 		
 		JButton stopwatchButton = new JButton("stopwatch");
 		topNav.add(stopwatchButton);
@@ -53,7 +57,6 @@ public class ClockTester
             frame.repaint();
 
             t.restart();
-            //t2.restart();
             });
 		
 		frame.add(topNav, BorderLayout.NORTH);
