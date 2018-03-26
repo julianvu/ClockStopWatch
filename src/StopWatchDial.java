@@ -25,8 +25,9 @@ public class StopWatchDial extends JPanel{
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(width, width));
 		
-		dial = new ClockFace(0,0,width, Type.STOPWATCH);
-		hand = new ClockHand(width/2, width/2, width/2, 0);
+		dial = new ClockFace(x,y,width, Type.STOPWATCH);
+		dial.setPreferredSize(new Dimension(width, width));
+		hand = new ClockHand(x+(width/2), y+(width/2), width/2, y);
 	}
 	
 	public void dialTick() {
@@ -35,7 +36,7 @@ public class StopWatchDial extends JPanel{
 	}
 	
 	public void dialReset() {
-		hand = new ClockHand(width/2, width/2, width/2, 0);
+		hand = new ClockHand(x+(width/2), y+(width/2), width/2, y);
 	}
 
 	public ClockHand getHand() {

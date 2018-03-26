@@ -14,8 +14,8 @@ public class Stopwatch extends JPanel{
 		this.diam = diam;
 		
 		outer = new StopWatchDial(0,0,diam);
-		inner = new StopWatchDial(0,diam/2,diam/2);
-		//inner.setPreferredSize(new Dimension(diam, diam));
+		inner = new StopWatchDial(0, diam/8, diam/2);
+		inner.setPreferredSize(new Dimension(diam/2, diam*3/4));
 		outer.add(inner);
 		this.add(outer);
 	}
