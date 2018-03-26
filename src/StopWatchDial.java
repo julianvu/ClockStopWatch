@@ -1,7 +1,5 @@
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class StopWatchDial extends JPanel{
 	
@@ -9,6 +7,7 @@ public class StopWatchDial extends JPanel{
 	private int y;
 	private int width;
 	ClockFace dial;
+
 	ClockHand hand;
 			
 	/**
@@ -38,7 +37,11 @@ public class StopWatchDial extends JPanel{
 	public void dialReset() {
 		hand = new ClockHand(width/2, width/2, width/2, 0);
 	}
-	
+
+	public ClockHand getHand() {
+		return hand;
+	}
+
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		dial.paintComponent(g2);

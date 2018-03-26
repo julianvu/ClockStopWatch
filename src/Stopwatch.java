@@ -1,6 +1,5 @@
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class Stopwatch extends JPanel{
 	int x;
@@ -8,7 +7,7 @@ public class Stopwatch extends JPanel{
 	int diam;
 	StopWatchDial outer;
 	StopWatchDial inner;
-	
+
 	public Stopwatch(int x, int y, int diam) {
 		this.x = x;
 		this.y = y;
@@ -32,6 +31,14 @@ public class Stopwatch extends JPanel{
 	public void reset() {
 		outer.dialReset();
 		inner.dialReset();
+	}
+
+	public StopWatchDial getOuter() {
+		return outer;
+	}
+
+	public StopWatchDial getInner() {
+		return inner;
 	}
 	
 	public void paintComponent(Graphics g) {
