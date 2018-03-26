@@ -9,7 +9,6 @@ public class ClockTester
 {
 	private static final int CLOCK_RADIUS = 500;
 	private static final int SEC_DELAY = 1000;
-	private static final int MIN_DELAY = 1000*60;
 
 	public static void main(String[] args)
 	{
@@ -19,19 +18,26 @@ public class ClockTester
 		Stopwatch stopwatch = new Stopwatch(0,0,CLOCK_RADIUS);
 		BorderLayout layout = new BorderLayout();
 		frame.setLayout(layout);
-		frame.add(myClock, BorderLayout.CENTER);
+
 		JPanel topNav = new JPanel(new FlowLayout());
+
+		JPanel clockPanel = new JPanel(new FlowLayout());
+        clockPanel.add(myClock, BorderLayout.CENTER);
+        frame.add(clockPanel, BorderLayout.CENTER);
 
         Timer t2 = new Timer(SEC_DELAY, event -> {
             myClock.tick();
             frame.repaint();
         });
 
+        t2.start();
+
 		JButton clockButton = new JButton("clock");
 		topNav.add(clockButton);
 		clockButton.addActionListener(e -> {
             frame.remove(layout.getLayoutComponent(BorderLayout.CENTER));
-            frame.add(myClock, BorderLayout.CENTER);
+            clockPanel.add(myClock, BorderLayout.CENTER);
+            frame.add(clockPanel, BorderLayout.CENTER);
             frame.revalidate();
             frame.repaint();
             t2.restart();
@@ -60,6 +66,7 @@ public class ClockTester
             });
 		
 		frame.add(topNav, BorderLayout.NORTH);
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
