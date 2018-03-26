@@ -14,7 +14,7 @@ public class MyClock extends JPanel {
 	private ClockHand secondHand;
 	private ClockHand minuteHand;
 	private ClockHand hourHand;
-			
+
 
 	public MyClock (int x, int y, int width){
 		this.x = x;
@@ -55,7 +55,10 @@ public class MyClock extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		faceIcon.paintComponent(g2);
 		secondHand.draw(g2);
+
+		g2.setColor(Color.BLACK);
 		minuteHand.draw(g2);
+		g2.setStroke(new BasicStroke(5));
 		hourHand.draw(g2);
 	}
 }

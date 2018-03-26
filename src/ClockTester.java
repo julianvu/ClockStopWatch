@@ -22,7 +22,9 @@ public class ClockTester
 		JPanel topNav = new JPanel(new FlowLayout());
 
 		JPanel clockPanel = new JPanel(new FlowLayout());
+
         clockPanel.add(myClock, BorderLayout.CENTER);
+        clockPanel.setBackground(Color.YELLOW);
         frame.add(clockPanel, BorderLayout.CENTER);
 
         Timer t2 = new Timer(SEC_DELAY, event -> {

@@ -12,6 +12,7 @@ public class Stopwatch extends JPanel{
 		this.x = x;
 		this.y = y;
 		this.diam = diam;
+		this.setBackground(Color.BLUE);
 		
 		outer = new StopWatchDial(0,0,diam);
 		inner = new StopWatchDial(0, diam/8, diam/2);
