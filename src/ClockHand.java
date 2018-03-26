@@ -33,6 +33,14 @@ public class ClockHand implements MoveableShape, Stroke {
         return tick;
     }
 
+    public double getCX() {
+        return x1;
+    }
+
+    public double getCY() {
+        return y1;
+    }
+
     public void tick() {
         if (tick == 60) {
             tick = 0;

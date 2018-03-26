@@ -1,10 +1,7 @@
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.*;
+import java.awt.*;
 
-public class MyClock extends JPanel implements MoveableShape{
+public class MyClock extends JPanel {
 	
 	private int x;
 	private int y;
@@ -13,6 +10,10 @@ public class MyClock extends JPanel implements MoveableShape{
     private int hourTick;
 	//private static final int OUTER_RADIUS = 500;
 	//private static final int INNER_RADIUS = 125;
+	private ClockFace faceIcon;
+	private ClockHand secondHand;
+	private ClockHand minuteHand;
+	private ClockHand hourHand;
 			
 
 	public MyClock (int x, int y, int width){
@@ -21,20 +22,11 @@ public class MyClock extends JPanel implements MoveableShape{
 		this.width = width;
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(width, width));
-		
 
-		ClockFace faceIcon = new ClockFace(0,0,width, Type.CLOCK);
-		ClockHand secondHand = new ClockHand(width/2, width2, width/2, 0);
-		ClockHand minuteHand = new ClockHand(width/2, width2, width/2, 0);
-		ClockHand hourHand = new ClockHand(width/2, width2, width/2, 0);
-		
-		//time
-		Calendar cal = new GregorianCalendar();
-		int second = cal.get(Calendar.SECOND);
-		int minute = cal.get(Calendar.MINUTE);
-		int hour = cal.get(Calendar.HOUR);
-		tick = minute;
-		hourTick = hour;
+		faceIcon = new ClockFace(0,0, width, Type.CLOCK);
+		secondHand = new ClockHand(width/2, width/2, width/2, 0);
+		minuteHand = new ClockHand(width/2, width/2, width/2, 0);
+		hourHand = new ClockHand(width/2, width/2, width/2, 0);
 		
 		faceIcon.setPreferredSize(new Dimension(width, width));
 		
@@ -42,13 +34,26 @@ public class MyClock extends JPanel implements MoveableShape{
 	}
 	
 	public void tick() {
-		
-		
+		int second = java.time.LocalTime.now().getSecond();
+		int minute = java.time.LocalTime.now().getMinute();
+		int hour = java.time.LocalTime.now().getHour();
+
+		double thetaSecond = second/60.0 * 2.0 * Math.PI - Math.PI/2;
+		double thetaMinute = minute/60.0 * 2.0 * Math.PI - Math.PI/2;
+		double thetaHour = hour*5/60.0 * 2.0 * Math.PI - Math.PI/2;
+
+		secondHand.setEndPoint(secondHand.getCX() + secondHand.getLength() * Math.cos(thetaSecond), secondHand.getCY() + secondHand.getLength() * Math.sin(thetaSecond));
+		minuteHand.setEndPoint(minuteHand.getCX() + minuteHand.getLength() * Math.cos(thetaMinute), minuteHand.getCY() + minuteHand.getLength() * Math.sin(thetaMinute));
+		hourHand.setEndPoint(hourHand.getCX() + hourHand.getLength() * Math.cos(thetaHour), hourHand.getCY() + hourHand.getLength() * Math.sin(thetaHour));
+
+		this.repaint();
 	}
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		super.paintComponent(g2);
-			
+		faceIcon.paintComponent(g2);
+		secondHand.draw(g2);
+		minuteHand.draw(g2);
+		hourHand.draw(g2);
 	}
 }
