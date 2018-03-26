@@ -24,13 +24,15 @@ public class MyClock extends JPanel {
 		this.setPreferredSize(new Dimension(width, width));
 
 		faceIcon = new ClockFace(0,0, width, Type.CLOCK);
-		secondHand = new ClockHand(width/2, width/2, width/2, 0);
-		minuteHand = new ClockHand(width/2, width/2, width/2, 0);
-		hourHand = new ClockHand(width/2, width/2, width/2, 0);
+		secondHand = new ClockHand(width/2, width/2, width/2, 50);
+		minuteHand = new ClockHand(width/2, width/2, width/2, 100);
+		hourHand = new ClockHand(width/2, width/2,width/2, 150);
 		
 		faceIcon.setPreferredSize(new Dimension(width, width));
+
+		tick();
 		
-		this.add(faceIcon);
+		//this.add(faceIcon);
 	}
 	
 	public void tick() {
