@@ -1,22 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 
 /**
-   A Clock face
+ *  A Clock face
  */
-
 public class ClockFace extends JPanel
 {
 	/**
-      Constructs a Clock
-      @param x the left of the bounding rectangle
-      @param y the top of the bounding rectangle
-      @param width the width of the bounding rectangle
+     * Constructs a Clock
+     * @param x the left of the bounding rectangle
+     * @param y the top of the bounding rectangle
+     * @param width the width of the bounding rectangle
 	 */
-	
 	public ClockFace(int x, int y, int width, Type type)
 	{
 		this.x = x;
@@ -27,6 +24,10 @@ public class ClockFace extends JPanel
 		this.setPreferredSize(new Dimension(width, width));
 	}
 
+	/**
+	 * Paints this ClockFace
+	 * @param g	Graphics component
+	 */
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D) g;

@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-   This program implements an animation that moves
-   a car shape.
+ *  This program implements an animation that moves
+ *  a car shape.
  */
 public class ClockTester
 {

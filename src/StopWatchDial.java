@@ -1,8 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Implementation of a StopWatchDial.
+ * Aggregates one ClockFace and one ClockHand
+ */
 public class StopWatchDial extends JPanel{
-	
+
+    // Instance variables
 	private int x;
 	private int y;
 	private int width;
@@ -11,13 +16,12 @@ public class StopWatchDial extends JPanel{
 	ClockHand hand;
 			
 	/**
-    Constructs a StopWatchDial using 2 ClockFaces <br>
-    x, y represent the outer dial's coords
-    @param x the left of the bounding rectangle
-    @param y the top of the bounding rectangle
-    @param width the width of the bounding rectangle
+     * Constructs a StopWatchDial using 2 ClockFaces <br>
+     * x, y represent the outer dial's coords
+     * @param x the left of the bounding rectangle
+     * @param y the top of the bounding rectangle
+     * @param width the width of the bounding rectangle
 	 */
-	
 	public StopWatchDial(int x, int y, int width){
 		this.x = x;
 		this.y = y;
@@ -29,16 +33,26 @@ public class StopWatchDial extends JPanel{
 		dial.setPreferredSize(new Dimension(width, width));
 		hand = new ClockHand(x+(width/2), y+(width/2), width/2, y);
 	}
-	
+
+    /**
+     * Moves ClockHand one unit clockwise
+     */
 	public void dialTick() {
 		hand.tick();
 		this.repaint();
 	}
-	
+
+    /**
+     * Resets ClockHand back to 0
+     */
 	public void dialReset() {
 		hand = new ClockHand(x+(width/2), y+(width/2), width/2, y);
 	}
 
+    /**
+     * Gets ClockHand object
+     * @return
+     */
 	public ClockHand getHand() {
 		return hand;
 	}
